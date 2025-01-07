@@ -16,7 +16,7 @@ const images = [
 
 const SignUpIndex = () => {
   const [password, setPassword] = useState("");
-  const [name , setName] = useState("");
+  const [name, setName] = useState("");
   const router = useRouter();
   return (
     <ScrollView className="flex-1 bg-black">
@@ -26,13 +26,20 @@ const SignUpIndex = () => {
       <View className="mt-10">
         <PhoneNumberInput placeholder="1st phone number" />
         <PhoneNumberInput placeholder="2nd phone number" />
-        <CustomTextInput value={name}onChangeText={(val) => setName(val)} placeholder="user name"/>
+        <CustomTextInput
+          value={name}
+          onChangeText={(val) => setName(val)}
+          placeholder="user name"
+        />
         <PasswordInput
           value={password}
           onChangeText={(val) => setPassword(val)}
         />
       </View>
-      <TouchableOpacity className="bg-blue-600 w-10/12 self-center mt-5 p-2 rounded-3xl items-center ">
+      <TouchableOpacity
+        className="bg-blue-600 w-10/12 self-center mt-5 p-2 rounded-3xl items-center "
+        onPress={() => router.navigate("/auth/signUp/facialRecognitionSplash")}
+      >
         <Text className="text-white text-base ">
           Continue with registration
         </Text>
@@ -62,7 +69,7 @@ const SignUpIndex = () => {
         </TouchableOpacity>
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default SignUpIndex
+export default SignUpIndex;
