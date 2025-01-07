@@ -1,12 +1,8 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from "react";
+import { Stack } from "expo-router";
 
 const ForgotPasswordLayout = () => {
-  return (
-    <View>
-      <Text>ForgotPasswordLayout</Text>
-    </View>
-  )
-}
+  return <Stack screenOptions={{ headerShown: false }}/>
+};
 
-export default ForgotPasswordLayout
+export default ForgotPasswordLayout;

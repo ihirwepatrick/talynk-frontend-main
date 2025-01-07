@@ -45,7 +45,10 @@ const SignUpIndex = () => {
         </Text>
       </TouchableOpacity>
       <View>
-        <Text className="text-blue-500 text-base mt-5 text-center">
+        <Text
+          className="text-blue-500 text-base mt-5 text-center"
+          onPress={() => router.navigate("/auth/forgotPassword")}
+        >
           or continue with
         </Text>
       </View>
