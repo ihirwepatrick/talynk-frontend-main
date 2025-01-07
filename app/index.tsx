@@ -1,9 +1,20 @@
-import { Text, View } from "react-native";
+import { View, Text } from 'react-native'
+import React, { useEffect } from 'react'
+import { useRouter } from 'expo-router'
 
-export default function Index() {
+const index = () => {
+  const router = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+    router.navigate('/auth')
+    }, 2000)
+  })
+
   return (
     <View>
-      <Text className="text-lg text-red-200">Edit app/index.tsx to edit this screen.</Text>
+      <Text>index</Text>
     </View>
-  );
+  )
 }
+
+export default index
