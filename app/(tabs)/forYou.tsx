@@ -3,7 +3,7 @@ import React from 'react'
 
 const ForYouScreen = () => {
   return (
-    <View>
+    <View className='bg-black flex-1'>
       <Text>ForYouScreen</Text>
     </View>
   )

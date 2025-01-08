@@ -3,7 +3,7 @@ import React from 'react'
 
 const UploadScreen = () => {
   return (
-    <View>
+    <View className='flex-1 bg-black'>
       <Text>UploadScreen</Text>
     </View>
   )

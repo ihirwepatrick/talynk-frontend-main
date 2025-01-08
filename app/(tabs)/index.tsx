@@ -3,7 +3,7 @@ import React from 'react'
 
 const TabsIndex = () => {
   return (
-    <View>
+    <View className='flex-1 bg-black'>
       <Text>TabsIndex</Text>
     </View>
   )

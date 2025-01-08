@@ -3,7 +3,7 @@ import React from 'react'
 
 const ProfileScreen = () => {
   return (
-    <View>
+    <View className='flex-1 bg-black'>
       <Text>ProfileScreen</Text>
     </View>
   )
