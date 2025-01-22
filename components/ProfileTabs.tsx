@@ -2,11 +2,34 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
+import PostGrid from "./PostGrid";
 
 type Tab = "approved" | "pending";
 
+// Sample data - replace with real data later
+const approvedPosts = [
+  { id: "1", imageUrl: "https://picsum.photos/200/200?random=1" },
+  { id: "2", imageUrl: "https://picsum.photos/200/200?random=2" },
+  { id: "3", imageUrl: "https://picsum.photos/200/200?random=3" },
+  { id: "4", imageUrl: "https://picsum.photos/200/200?random=4" },
+  { id: "5", imageUrl: "https://picsum.photos/200/200?random=5" },
+  { id: "6", imageUrl: "https://picsum.photos/200/200?random=6" },
+  { id: "7", imageUrl: "https://picsum.photos/200/200?random=7" },
+  { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
+];
+
+const pendingPosts = [
+  { id: "7", imageUrl: "https://picsum.photos/200/200?random=7" },
+  { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
+  { id: "9", imageUrl: "https://picsum.photos/200/200?random=9" },
+];
+
 const ProfileTabs = () => {
   const [activeTab, setActiveTab] = useState<Tab>("approved");
+
+  const handlePostPress = (postId: string) => {
+    console.log(`Post ${postId} pressed`);
+  };
 
   return (
     <View className="mt-6">
@@ -55,15 +78,11 @@ const ProfileTabs = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="p-4">
+      <View className="mt-4">
         {activeTab === "approved" ? (
-          <Text style={{ color: Colors.text.secondary }}>
-            Approved content will appear here
-          </Text>
+          <PostGrid posts={approvedPosts} onPostPress={handlePostPress} />
         ) : (
-          <Text style={{ color: Colors.text.secondary }}>
-            Pending content will appear here
-          </Text>
+          <PostGrid posts={pendingPosts} onPostPress={handlePostPress} />
         )}
       </View>
     </View>
