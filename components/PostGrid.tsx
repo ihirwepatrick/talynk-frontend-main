@@ -15,7 +15,7 @@ const PostGrid = ({ posts, onPostPress }: PostGridProps) => {
   const screenWidth = Dimensions.get("window").width;
   const gap = 1;
   const padding = 16;
-  const itemWidth = (screenWidth - (padding * 2) - (gap * 2)) / 3;
+  const itemWidth = (screenWidth - padding * 2 - gap * 2) / 3;
 
   return (
     <View className="flex-row flex-wrap px-4">
