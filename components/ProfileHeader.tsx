@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Colors from "@/constants/Colors";
+import Typography from "@/constants/Typography";
 
 type ProfileHeaderProps = {
   name: string;
@@ -18,8 +19,11 @@ const ProfileHeader = ({ name }: ProfileHeaderProps) => {
       </TouchableOpacity>
 
       <Text
-        style={{ color: Colors.text.primary }}
-        className="text-lg font-semibold"
+        style={{
+          color: Colors.text.primary,
+          fontFamily: Typography.fonts.semiBold,
+          fontSize: Typography.sizes.lg,
+        }}
       >
         {name}
       </Text>
