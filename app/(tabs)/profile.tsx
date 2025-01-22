@@ -32,9 +32,12 @@ const Profile = () => {
       className="flex-1"
     >
       <ProfileHeader name="Jane Smith" />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="mt-4">
-          <View className="flex-row items-start">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
+        <View>
+          <View className="flex-row items-start mt-4">
             <ProfileAvatar
               imageUrl="https://picsum.photos/200"
               name="Jane Smith"
