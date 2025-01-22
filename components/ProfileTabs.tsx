@@ -117,29 +117,29 @@ const ProfileTabs = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="mt-4 px-4">
-        {activeTab === "approved" ? (
+      {activeTab === "approved" ? (
+        <View className="mt-4">
           <PostGrid
             posts={approvedPosts}
             onPostPress={handlePostPress}
             isLoading={isLoading}
           />
-        ) : (
-          <View>
-            {pendingPosts.map((post) => (
-              <PendingPostCard
-                key={post.id}
-                imageUrl={post.imageUrl}
-                caption={post.caption}
-                timestamp={post.timestamp}
-                duration={post.type === "video" ? post.duration : undefined}
-                onEdit={() => handleEditPost(post.id)}
-                onCancel={() => handleCancelPost(post.id)}
-              />
-            ))}
-          </View>
-        )}
-      </View>
+        </View>
+      ) : (
+        <View className="mt-4 px-4">
+          {pendingPosts.map((post) => (
+            <PendingPostCard
+              key={post.id}
+              imageUrl={post.imageUrl}
+              caption={post.caption}
+              timestamp={post.timestamp}
+              duration={post.type === "video" ? post.duration : undefined}
+              onEdit={() => handleEditPost(post.id)}
+              onCancel={() => handleCancelPost(post.id)}
+            />
+          ))}
+        </View>
+      )}
     </View>
   );
 };
