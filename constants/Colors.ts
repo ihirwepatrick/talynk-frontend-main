@@ -10,7 +10,7 @@ const Colors = {
   background: {
     primary: '#101113',   // black
     secondary: '#18181B', // zinc-900
-    tertiary: '#27272A',  // zinc-800
+    tertiary: '#1E1E1E',  // zinc-800
   },
 
   // Text colors

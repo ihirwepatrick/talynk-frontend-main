@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import Colors from "@/constants/Colors";
 
 type ProfileStatsProps = {
   posts: number;
@@ -16,22 +17,44 @@ const ProfileStats = ({ posts, subscribers, views }: ProfileStatsProps) => {
   };
 
   return (
-    <View className="flex-row justify-between px-8 py-4 bg-zinc-900 rounded-xl mx-4">
+    <View
+      style={{ backgroundColor: Colors.background.secondary }}
+      className="flex-row justify-between px-8 py-4 rounded-xl mx-4"
+    >
       <View className="items-center">
-        <Text className="text-white text-xl font-bold">{posts}</Text>
-        <Text className="text-gray-400 text-sm">Posts</Text>
+        <Text
+          style={{ color: Colors.text.primary }}
+          className="text-xl font-bold"
+        >
+          {posts}
+        </Text>
+        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+          Posts
+        </Text>
       </View>
 
       <View className="items-center">
-        <Text className="text-white text-xl font-bold">{subscribers}</Text>
-        <Text className="text-gray-400 text-sm">Subscribers</Text>
+        <Text
+          style={{ color: Colors.text.primary }}
+          className="text-xl font-bold"
+        >
+          {subscribers}
+        </Text>
+        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+          Subscribers
+        </Text>
       </View>
 
       <View className="items-center">
-        <Text className="text-white text-xl font-bold">
+        <Text
+          style={{ color: Colors.text.primary }}
+          className="text-xl font-bold"
+        >
           {formatNumber(views)}
         </Text>
-        <Text className="text-gray-400 text-sm">Views</Text>
+        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+          Views
+        </Text>
       </View>
     </View>
   );
