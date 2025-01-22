@@ -35,7 +35,7 @@ const ProfileActions = ({
 
       <TouchableOpacity
         onPress={onShareProfile}
-        style={{ backgroundColor: Colors.background.tertiary }}
+        style={{ backgroundColor: Colors.button.primary }}
         className="flex-1 flex-row items-center justify-center py-2.5 rounded-xl ml-2"
       >
         <Ionicons

@@ -38,7 +38,7 @@ const Colors = {
 
   // Button colors
   button: {
-    primary: '#0EA5E9',  // sky-500
+    primary: '#2F3037',  // sky-500
     secondary: '#27272A', // zinc-800
     disabled: '#3F3F46',  // zinc-700
   },

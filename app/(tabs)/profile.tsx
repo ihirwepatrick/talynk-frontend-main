@@ -6,6 +6,7 @@ import ProfileInfo from "@/components/ProfileInfo";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import ProfileActions from "@/components/ProfileActions";
 import Colors from "@/constants/Colors";
+import ProfileTabs from "@/components/ProfileTabs";
 
 const Profile = () => {
   const handleBoostProfile = () => {
@@ -47,6 +48,7 @@ const Profile = () => {
           onEditProfile={handleEditProfile}
           onShareProfile={handleShareProfile}
         />
+        <ProfileTabs />
       </View>
       {/* We'll add other components here as we build them */}
     </SafeAreaView>
