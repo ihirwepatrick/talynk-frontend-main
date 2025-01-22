@@ -47,19 +47,19 @@
     },
     "fonts": [
       {
-        "asset": "assets/fonts/Poppins-Regular.ttf",
+        "asset": "./assets/fonts/Poppins-Regular.ttf",
         "family": "Poppins-Regular"
       },
       {
-        "asset": "assets/fonts/Poppins-Medium.ttf",
+        "asset": "./assets/fonts/Poppins-Medium.ttf",
         "family": "Poppins-Medium"
       },
       {
-        "asset": "assets/fonts/Poppins-SemiBold.ttf",
+        "asset": "./assets/fonts/Poppins-SemiBold.ttf",
         "family": "Poppins-SemiBold"
       },
       {
-        "asset": "assets/fonts/Poppins-Bold.ttf",
+        "asset": "./assets/fonts/Poppins-Bold.ttf",
         "family": "Poppins-Bold"
       }
     ]

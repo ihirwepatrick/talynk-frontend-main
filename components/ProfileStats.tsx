@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Colors from "@/constants/Colors";
+import Typography from "@/constants/Typography";
 
 type ProfileStatsProps = {
   posts: number;
@@ -23,36 +24,63 @@ const ProfileStats = ({ posts, subscribers, views }: ProfileStatsProps) => {
     >
       <View className="items-center">
         <Text
-          style={{ color: Colors.text.primary }}
-          className="text-xl font-bold"
+          style={{
+            color: Colors.text.primary,
+            fontFamily: Typography.fonts.bold,
+            fontSize: Typography.sizes.xl,
+          }}
         >
           {posts}
         </Text>
-        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+        <Text
+          style={{
+            color: Colors.text.secondary,
+            fontFamily: Typography.fonts.regular,
+            fontSize: Typography.sizes.sm,
+          }}
+        >
           Posts
         </Text>
       </View>
 
       <View className="items-center">
         <Text
-          style={{ color: Colors.text.primary }}
-          className="text-xl font-bold"
+          style={{
+            color: Colors.text.primary,
+            fontFamily: Typography.fonts.bold,
+            fontSize: Typography.sizes.xl,
+          }}
         >
           {subscribers}
         </Text>
-        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+        <Text
+          style={{
+            color: Colors.text.secondary,
+            fontFamily: Typography.fonts.regular,
+            fontSize: Typography.sizes.sm,
+          }}
+        >
           Subscribers
         </Text>
       </View>
 
       <View className="items-center">
         <Text
-          style={{ color: Colors.text.primary }}
-          className="text-xl font-bold"
+          style={{
+            color: Colors.text.primary,
+            fontFamily: Typography.fonts.bold,
+            fontSize: Typography.sizes.xl,
+          }}
         >
           {formatNumber(views)}
         </Text>
-        <Text style={{ color: Colors.text.secondary }} className="text-sm">
+        <Text
+          style={{
+            color: Colors.text.secondary,
+            fontFamily: Typography.fonts.regular,
+            fontSize: Typography.sizes.sm,
+          }}
+        >
           Views
         </Text>
       </View>
