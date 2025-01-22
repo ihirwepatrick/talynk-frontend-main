@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Image, Dimensions, TouchableOpacity, ActivityIndicator, Text } from "react-native";
+import {
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  ActivityIndicator,
+  Text,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
@@ -33,7 +40,11 @@ const PostGrid = ({ posts, onPostPress, isLoading }: PostGridProps) => {
   if (posts.length === 0) {
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="images-outline" size={48} color={Colors.text.secondary} />
+        <Ionicons
+          name="images-outline"
+          size={48}
+          color={Colors.text.secondary}
+        />
         <Text
           style={{
             color: Colors.text.secondary,
