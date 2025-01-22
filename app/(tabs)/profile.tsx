@@ -4,6 +4,7 @@ import ProfileHeader from "@/components/ProfileHeader";
 import ProfileStats from "@/components/ProfileStats";
 import ProfileInfo from "@/components/ProfileInfo";
 import ProfileAvatar from "@/components/ProfileAvatar";
+import ProfileActions from "@/components/ProfileActions";
 import Colors from "@/constants/Colors";
 
 const Profile = () => {
@@ -14,6 +15,14 @@ const Profile = () => {
 
   const handleEditAvatar = () => {
     console.log("Edit avatar clicked");
+  };
+
+  const handleEditProfile = () => {
+    console.log("Edit profile clicked");
+  };
+
+  const handleShareProfile = () => {
+    console.log("Share profile clicked");
   };
 
   return (
@@ -34,6 +43,10 @@ const Profile = () => {
           </View>
         </View>
         <ProfileInfo totalVisits={2345} onBoostProfile={handleBoostProfile} />
+        <ProfileActions
+          onEditProfile={handleEditProfile}
+          onShareProfile={handleShareProfile}
+        />
       </View>
       {/* We'll add other components here as we build them */}
     </SafeAreaView>
