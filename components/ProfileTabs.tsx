@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
 import PostGrid, { Post } from "./PostGrid";
 import PendingPostCard from "./PendingPostCard";
+import PostCard from "./PostCard";
 
 type Tab = "approved" | "pending";
+type ViewMode = "grid" | "full";
 
 // Updated sample data with video type
 const approvedPosts: Post[] = [
@@ -60,11 +63,8 @@ type ProfileTabsProps = {
 
 const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("approved");
+  const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [isLoading, setIsLoading] = useState(false);
-
-  const handlePostPress = (postId: string) => {
-    console.log(`Post ${postId} pressed`);
-  };
 
   const handleEditPost = (postId: string) => {
     console.log("Edit post:", postId);
@@ -74,76 +74,123 @@ const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
     console.log("Cancel post:", postId);
   };
 
+  const renderApprovedPosts = () => {
+    if (viewMode === "grid") {
+      return (
+        <PostGrid
+          posts={approvedPosts}
+          onPostPress={onPostPress}
+          isLoading={isLoading}
+        />
+      );
+    }
+
+    return approvedPosts.map((post) => (
+      <PostCard
+        key={post.id}
+        username={post.username || "User"}
+        timestamp={post.timestamp || ""}
+        imageUrl={post.imageUrl}
+        caption={post.caption || ""}
+        likes={post.likes || 0}
+        comments={post.comments || 0}
+        userAvatar={post.userAvatar || "https://picsum.photos/100/100"}
+        onOptionsPress={() => console.log("options")}
+        onLikePress={() => console.log("like")}
+        onCommentPress={() => console.log("comment")}
+        onBookmarkPress={() => console.log("bookmark")}
+      />
+    ));
+  };
+
   return (
     <View className="mt-6">
-      <View className="flex-row items-center px-4 border-b-2 border-zinc-800">
-        <TouchableOpacity
-          onPress={() => setActiveTab("approved")}
-          className="flex-1 pb-3"
-        >
-          <Text
+      <View className="px-4 flex-row items-center justify-between">
+        <View className="flex-row flex-1">
+          <TouchableOpacity
+            onPress={() => setActiveTab("approved")}
+            className="flex-1 pb-3 border-b-2"
             style={{
-              color:
+              borderColor:
                 activeTab === "approved"
-                  ? Colors.text.primary
-                  : Colors.text.secondary,
-              fontFamily: Typography.fonts.semiBold,
-              fontSize: Typography.sizes.lg,
+                  ? Colors.primary.main
+                  : Colors.border.light,
             }}
-            className="text-center"
           >
-            Approved Posts
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                color:
+                  activeTab === "approved"
+                    ? Colors.text.primary
+                    : Colors.text.secondary,
+                fontFamily: Typography.fonts.semiBold,
+                fontSize: Typography.sizes.lg,
+              }}
+              className="text-center"
+            >
+              Approved Posts
+            </Text>
+          </TouchableOpacity>
 
-        <View
-          style={{ backgroundColor: Colors.border.light }}
-          className="h-5 w-[2px]"
-        />
-
-        <TouchableOpacity
-          onPress={() => setActiveTab("pending")}
-          className="flex-1 pb-3"
-        >
-          <Text
+          <TouchableOpacity
+            onPress={() => setActiveTab("pending")}
+            className="flex-1 pb-3 border-b-2"
             style={{
-              color:
+              borderColor:
                 activeTab === "pending"
-                  ? Colors.text.primary
-                  : Colors.text.secondary,
-              fontFamily: Typography.fonts.semiBold,
-              fontSize: Typography.sizes.lg,
+                  ? Colors.primary.main
+                  : Colors.border.light,
             }}
-            className="text-center"
           >
-            Pending
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                color:
+                  activeTab === "pending"
+                    ? Colors.text.primary
+                    : Colors.text.secondary,
+                fontFamily: Typography.fonts.semiBold,
+                fontSize: Typography.sizes.lg,
+              }}
+              className="text-center"
+            >
+              Pending
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {activeTab === "approved" && (
+          <TouchableOpacity
+            onPress={() => setViewMode(viewMode === "grid" ? "full" : "grid")}
+            className="ml-4"
+          >
+            <Ionicons
+              name={viewMode === "grid" ? "list" : "grid"}
+              size={24}
+              color={Colors.text.primary}
+            />
+          </TouchableOpacity>
+        )}
       </View>
 
-      {activeTab === "approved" ? (
-        <View className="mt-4">
-          <PostGrid
-            posts={approvedPosts}
-            onPostPress={onPostPress}
-            isLoading={isLoading}
-          />
-        </View>
-      ) : (
-        <View className="mt-4 px-4">
-          {pendingPosts.map((post) => (
-            <PendingPostCard
-              key={post.id}
-              imageUrl={post.imageUrl}
-              caption={post.caption}
-              timestamp={post.timestamp}
-              duration={post.type === "video" ? post.duration : undefined}
-              onEdit={() => handleEditPost(post.id)}
-              onCancel={() => handleCancelPost(post.id)}
-            />
-          ))}
-        </View>
-      )}
+      <View className="mt-4">
+        {activeTab === "approved" ? (
+          renderApprovedPosts()
+        ) : (
+          <View className="px-4">
+            {pendingPosts.map((post) => (
+              <PendingPostCard
+                key={post.id}
+                imageUrl={post.imageUrl}
+                caption={post.caption}
+                timestamp={post.timestamp}
+                duration={post.type === "video" ? post.duration : undefined}
+                onEdit={() => handleEditPost(post.id)}
+                onCancel={() => handleCancelPost(post.id)}
+              />
+            ))}
+          </View>
+        )}
+      </View>
     </View>
   );
 };
