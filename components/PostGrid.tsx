@@ -23,6 +23,33 @@ type PostGridProps = {
   isLoading?: boolean;
 };
 
+const EmptyState = () => (
+  <View className="flex-1 justify-center items-center py-12">
+    <Ionicons name="camera-outline" size={64} color={Colors.text.secondary} />
+    <Text
+      style={{
+        color: Colors.text.primary,
+        fontFamily: Typography.fonts.semiBold,
+        fontSize: Typography.sizes.lg,
+      }}
+      className="mt-4"
+    >
+      No posts Yet
+    </Text>
+    <Text
+      style={{
+        color: Colors.text.secondary,
+        fontFamily: Typography.fonts.regular,
+        fontSize: Typography.sizes.sm,
+        textAlign: "center",
+      }}
+      className="mt-2 max-w-[250px]"
+    >
+      Take the first step and show the world you can do!
+    </Text>
+  </View>
+);
+
 const PostGrid = ({ posts, onPostPress, isLoading }: PostGridProps) => {
   const screenWidth = Dimensions.get("window").width;
   const gap = 1;
@@ -38,25 +65,7 @@ const PostGrid = ({ posts, onPostPress, isLoading }: PostGridProps) => {
   }
 
   if (posts.length === 0) {
-    return (
-      <View className="flex-1 justify-center items-center py-12">
-        <Ionicons
-          name="images-outline"
-          size={48}
-          color={Colors.text.secondary}
-        />
-        <Text
-          style={{
-            color: Colors.text.secondary,
-            fontFamily: Typography.fonts.medium,
-            fontSize: Typography.sizes.base,
-          }}
-          className="mt-2"
-        >
-          No posts yet
-        </Text>
-      </View>
-    );
+    return <EmptyState />;
   }
 
   return (
