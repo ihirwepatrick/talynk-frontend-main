@@ -1,0 +1,154 @@
+import React from "react";
+import {
+  View,
+  SafeAreaView,
+  FlatList,
+  Dimensions,
+  Image,
+  Text,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "@/constants/Colors";
+import Typography from "@/constants/Typography";
+
+type Post = {
+  id: string;
+  imageUrl: string;
+  caption?: string;
+  timestamp?: string;
+  type?: "video" | "image";
+  duration?: string;
+  likes?: number;
+  comments?: number;
+};
+
+type PostViewProps = {
+  visible: boolean;
+  posts: Post[];
+  initialPostId: string;
+  onClose: () => void;
+};
+
+const PostView = ({
+  visible,
+  posts,
+  initialPostId,
+  onClose,
+}: PostViewProps) => {
+  const { width } = Dimensions.get("window");
+  const initialScrollIndex = posts.findIndex(
+    (post) => post.id === initialPostId
+  );
+
+  const renderPost = ({ item: post }) => (
+    <View style={{ width }} className="bg-black">
+      <SafeAreaView>
+        <View className="px-4 py-2 flex-row items-center justify-between">
+          <TouchableOpacity onPress={onClose} className="flex-row items-center">
+            <Ionicons name="close" size={24} color={Colors.text.primary} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons
+              name="ellipsis-vertical"
+              size={24}
+              color={Colors.text.primary}
+            />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+
+      <Image
+        source={{ uri: post.imageUrl }}
+        style={{ width, height: width }}
+        className="bg-zinc-900"
+      />
+
+      <View className="p-4">
+        {post.caption && (
+          <Text
+            style={{
+              color: Colors.text.primary,
+              fontFamily: Typography.fonts.regular,
+            }}
+            className="mb-2"
+          >
+            {post.caption}
+          </Text>
+        )}
+
+        <View className="flex-row items-center justify-between">
+          <View className="flex-row items-center">
+            <TouchableOpacity className="flex-row items-center mr-4">
+              <Ionicons
+                name="heart-outline"
+                size={24}
+                color={Colors.text.primary}
+              />
+              <Text
+                style={{
+                  color: Colors.text.primary,
+                  fontFamily: Typography.fonts.medium,
+                }}
+                className="ml-1"
+              >
+                {post.likes || 0}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity className="flex-row items-center">
+              <Ionicons
+                name="chatbubble-outline"
+                size={22}
+                color={Colors.text.primary}
+              />
+              <Text
+                style={{
+                  color: Colors.text.primary,
+                  fontFamily: Typography.fonts.medium,
+                }}
+                className="ml-1"
+              >
+                {post.comments || 0}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {post.timestamp && (
+            <Text
+              style={{
+                color: Colors.text.secondary,
+                fontFamily: Typography.fonts.regular,
+                fontSize: Typography.sizes.sm,
+              }}
+            >
+              {post.timestamp}
+            </Text>
+          )}
+        </View>
+      </View>
+    </View>
+  );
+
+  return (
+    <Modal visible={visible} animationType="slide" statusBarTranslucent>
+      <View className="flex-1 bg-black">
+        <FlatList
+          data={posts}
+          renderItem={renderPost}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          initialScrollIndex={initialScrollIndex}
+          getItemLayout={(_, index) => ({
+            length: width,
+            offset: width * index,
+            index,
+          })}
+        />
+      </View>
+    </Modal>
+  );
+};
+
+export default PostView;

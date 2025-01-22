@@ -10,6 +10,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
+import { useRouter } from "expo-router";
 
 export type Post = {
   id: string;
@@ -51,10 +52,19 @@ const EmptyState = () => (
 );
 
 const PostGrid = ({ posts, onPostPress, isLoading }: PostGridProps) => {
+  const router = useRouter();
   const screenWidth = Dimensions.get("window").width;
   const gap = 1;
   const padding = 16;
   const itemWidth = (screenWidth - padding * 2 - gap * 2) / 3;
+
+  const handlePostPress = (postId: string) => {
+    router.push({
+      pathname: "/posts/[id]",
+      params: { id: postId },
+    });
+    onPostPress(postId);
+  };
 
   if (isLoading) {
     return (
@@ -73,7 +83,7 @@ const PostGrid = ({ posts, onPostPress, isLoading }: PostGridProps) => {
       {posts.map((post) => (
         <TouchableOpacity
           key={post.id}
-          onPress={() => onPostPress(post.id)}
+          onPress={() => handlePostPress(post.id)}
           style={{
             width: itemWidth,
             height: itemWidth,
