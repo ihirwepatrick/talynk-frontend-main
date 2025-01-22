@@ -10,52 +10,43 @@ const ProfileTabs = () => {
 
   return (
     <View className="mt-6">
-      <View className="flex-row px-4">
+      <View className="flex-row items-center px-4 border-b-2 border-zinc-800">
         <TouchableOpacity
           onPress={() => setActiveTab("approved")}
-          className="flex-1 pb-2"
-          style={{
-            borderBottomWidth: 2,
-            borderBottomColor:
-              activeTab === "approved"
-                ? Colors.primary.main
-                : Colors.border.light,
-          }}
+          className="flex-1 pb-3"
         >
           <Text
             style={{
               color:
                 activeTab === "approved"
-                  ? Colors.primary.main
+                  ? Colors.text.primary
                   : Colors.text.secondary,
-              fontFamily: Typography.fonts.medium,
-              fontSize: Typography.sizes.base,
+              fontFamily: Typography.fonts.semiBold,
+              fontSize: Typography.sizes.lg,
             }}
             className="text-center"
           >
-            Approved
+            Approved Posts
           </Text>
         </TouchableOpacity>
 
+        <View
+          style={{ backgroundColor: Colors.border.light }}
+          className="h-5 w-[2px]"
+        />
+
         <TouchableOpacity
           onPress={() => setActiveTab("pending")}
-          className="flex-1 pb-2"
-          style={{
-            borderBottomWidth: 2,
-            borderBottomColor:
-              activeTab === "pending"
-                ? Colors.primary.main
-                : Colors.border.light,
-          }}
+          className="flex-1 pb-3"
         >
           <Text
             style={{
               color:
                 activeTab === "pending"
-                  ? Colors.primary.main
+                  ? Colors.text.primary
                   : Colors.text.secondary,
-              fontFamily: Typography.fonts.medium,
-              fontSize: Typography.sizes.base,
+              fontFamily: Typography.fonts.semiBold,
+              fontSize: Typography.sizes.lg,
             }}
             className="text-center"
           >
