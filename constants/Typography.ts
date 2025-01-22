@@ -1,9 +1,9 @@
 const Typography = {
   fonts: {
-    regular: "Poppins_400Regular",
-    medium: "Poppins_500Medium",
-    semiBold: "Poppins_600SemiBold",
-    bold: "Poppins_700Bold",
+    regular: "Poppins-Regular",
+    medium: "Poppins-Medium",
+    semiBold: "Poppins-SemiBold",
+    bold: "Poppins-Bold",
   },
   sizes: {
     xs: 12,
