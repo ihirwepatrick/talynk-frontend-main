@@ -2,30 +2,47 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
-import PostGrid from "./PostGrid";
+import PostGrid, { Post } from "./PostGrid";
 
 type Tab = "approved" | "pending";
 
-// Sample data - replace with real data later
-const approvedPosts = [
-  { id: "1", imageUrl: "https://picsum.photos/200/200?random=1" },
+// Updated sample data with video type
+const approvedPosts: Post[] = [
+  {
+    id: "1",
+    imageUrl: "https://picsum.photos/200/200?random=1",
+    type: "video",
+  },
   { id: "2", imageUrl: "https://picsum.photos/200/200?random=2" },
-  { id: "3", imageUrl: "https://picsum.photos/200/200?random=3" },
+  {
+    id: "3",
+    imageUrl: "https://picsum.photos/200/200?random=3",
+    type: "video",
+  },
   { id: "4", imageUrl: "https://picsum.photos/200/200?random=4" },
   { id: "5", imageUrl: "https://picsum.photos/200/200?random=5" },
-  { id: "6", imageUrl: "https://picsum.photos/200/200?random=6" },
+  {
+    id: "6",
+    imageUrl: "https://picsum.photos/200/200?random=6",
+    type: "video",
+  },
   { id: "7", imageUrl: "https://picsum.photos/200/200?random=7" },
   { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
 ];
 
-const pendingPosts = [
-  { id: "7", imageUrl: "https://picsum.photos/200/200?random=7" },
+const pendingPosts: Post[] = [
+  {
+    id: "7",
+    imageUrl: "https://picsum.photos/200/200?random=7",
+    type: "video",
+  },
   { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
   { id: "9", imageUrl: "https://picsum.photos/200/200?random=9" },
 ];
 
 const ProfileTabs = () => {
   const [activeTab, setActiveTab] = useState<Tab>("approved");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePostPress = (postId: string) => {
     console.log(`Post ${postId} pressed`);
@@ -80,9 +97,17 @@ const ProfileTabs = () => {
 
       <View className="mt-4">
         {activeTab === "approved" ? (
-          <PostGrid posts={approvedPosts} onPostPress={handlePostPress} />
+          <PostGrid
+            posts={approvedPosts}
+            onPostPress={handlePostPress}
+            isLoading={isLoading}
+          />
         ) : (
-          <PostGrid posts={pendingPosts} onPostPress={handlePostPress} />
+          <PostGrid
+            posts={pendingPosts}
+            onPostPress={handlePostPress}
+            isLoading={isLoading}
+          />
         )}
       </View>
     </View>
