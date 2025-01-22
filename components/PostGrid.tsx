@@ -16,6 +16,13 @@ export type Post = {
   id: string;
   imageUrl: string;
   type?: "video" | "image";
+  caption?: string;
+  timestamp?: string;
+  duration?: string;
+  likes?: number;
+  comments?: number;
+  username?: string;
+  userAvatar?: string;
 };
 
 type PostGridProps = {

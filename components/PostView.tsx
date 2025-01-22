@@ -42,7 +42,7 @@ const PostView = ({
     (post) => post.id === initialPostId
   );
 
-  const renderPost = ({ item: post }) => (
+  const renderPost = ({ item: post }: { item: Post }) => (
     <View style={{ width }} className="bg-black">
       <SafeAreaView>
         <View className="px-4 py-2 flex-row items-center justify-between">

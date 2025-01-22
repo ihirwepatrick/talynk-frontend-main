@@ -54,7 +54,11 @@ const pendingPosts = [
   },
 ];
 
-const ProfileTabs = () => {
+type ProfileTabsProps = {
+  onPostPress: (postId: string) => void;
+};
+
+const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("approved");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -121,7 +125,7 @@ const ProfileTabs = () => {
         <View className="mt-4">
           <PostGrid
             posts={approvedPosts}
-            onPostPress={handlePostPress}
+            onPostPress={onPostPress}
             isLoading={isLoading}
           />
         </View>
@@ -145,3 +149,4 @@ const ProfileTabs = () => {
 };
 
 export default ProfileTabs;
+export { approvedPosts };

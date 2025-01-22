@@ -12,6 +12,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
+import { Post } from "@/components/PostGrid";
 
 // Sample data - replace with real data later
 const posts = [
@@ -35,7 +36,7 @@ const PostView = () => {
 
   const initialScrollIndex = posts.findIndex((post) => post.id === id);
 
-  const renderPost = ({ item: post }) => (
+  const renderPost = ({ item: post }: { item: Post }) => (
     <View style={{ width }} className="bg-black">
       <SafeAreaView>
         <View className="px-4 py-2 flex-row items-center justify-between">
@@ -135,7 +136,7 @@ const PostView = () => {
   return (
     <View className="flex-1 bg-black">
       <FlatList
-        data={posts}
+        data={posts as Post[]}
         renderItem={renderPost}
         horizontal
         pagingEnabled

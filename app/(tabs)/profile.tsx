@@ -8,6 +8,8 @@ import ProfileActions from "@/components/ProfileActions";
 import Colors from "@/constants/Colors";
 import ProfileTabs from "@/components/ProfileTabs";
 import PostView from "@/components/PostView";
+import { approvedPosts } from "@/components/ProfileTabs";
+import PostCard from "@/components/PostCard";
 
 const Profile = () => {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
@@ -63,7 +65,20 @@ const Profile = () => {
             onEditProfile={handleEditProfile}
             onShareProfile={handleShareProfile}
           />
-          <ProfileTabs />
+          <ProfileTabs onPostPress={handlePostPress} />
+          <PostCard
+            username="John Smith"
+            timestamp="2 mins ago"
+            imageUrl="https://picsum.photos/800/800"
+            caption="Some caption text"
+            likes={2410}
+            comments={101}
+            userAvatar="https://picsum.photos/100/100"
+            onOptionsPress={() => console.log("options")}
+            onLikePress={() => console.log("like")}
+            onCommentPress={() => console.log("comment")}
+            onBookmarkPress={() => console.log("bookmark")}
+          />
         </View>
       </ScrollView>
       <PostView
