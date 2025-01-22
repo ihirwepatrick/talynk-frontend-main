@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import Colors from "@/constants/Colors";
 import Typography from "@/constants/Typography";
 import PostGrid, { Post } from "./PostGrid";
+import PendingPostCard from "./PendingPostCard";
 
 type Tab = "approved" | "pending";
 
@@ -30,14 +31,27 @@ const approvedPosts: Post[] = [
   { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
 ];
 
-const pendingPosts: Post[] = [
+const pendingPosts = [
   {
     id: "7",
     imageUrl: "https://picsum.photos/200/200?random=7",
     type: "video",
+    caption: "The caption on the post....",
+    timestamp: "2 Days ago",
+    duration: "2:32",
   },
-  { id: "8", imageUrl: "https://picsum.photos/200/200?random=8" },
-  { id: "9", imageUrl: "https://picsum.photos/200/200?random=9" },
+  {
+    id: "8",
+    imageUrl: "https://picsum.photos/200/200?random=8",
+    caption: "Another pending post",
+    timestamp: "1 Day ago",
+  },
+  {
+    id: "9",
+    imageUrl: "https://picsum.photos/200/200?random=9",
+    caption: "Yet another post",
+    timestamp: "5 Hours ago",
+  },
 ];
 
 const ProfileTabs = () => {
@@ -46,6 +60,14 @@ const ProfileTabs = () => {
 
   const handlePostPress = (postId: string) => {
     console.log(`Post ${postId} pressed`);
+  };
+
+  const handleEditPost = (postId: string) => {
+    console.log("Edit post:", postId);
+  };
+
+  const handleCancelPost = (postId: string) => {
+    console.log("Cancel post:", postId);
   };
 
   return (
@@ -95,7 +117,7 @@ const ProfileTabs = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="mt-4">
+      <View className="mt-4 px-4">
         {activeTab === "approved" ? (
           <PostGrid
             posts={approvedPosts}
@@ -103,11 +125,19 @@ const ProfileTabs = () => {
             isLoading={isLoading}
           />
         ) : (
-          <PostGrid
-            posts={pendingPosts}
-            onPostPress={handlePostPress}
-            isLoading={isLoading}
-          />
+          <View>
+            {pendingPosts.map((post) => (
+              <PendingPostCard
+                key={post.id}
+                imageUrl={post.imageUrl}
+                caption={post.caption}
+                timestamp={post.timestamp}
+                duration={post.type === "video" ? post.duration : undefined}
+                onEdit={() => handleEditPost(post.id)}
+                onCancel={() => handleCancelPost(post.id)}
+              />
+            ))}
+          </View>
         )}
       </View>
     </View>
