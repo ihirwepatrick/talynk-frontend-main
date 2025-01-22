@@ -23,9 +23,10 @@ const Profile = () => {
     >
       <ProfileHeader name="Jane Smith" />
       <View className="mt-4">
-        <View className="flex-row items-center">
+        <View className="flex-row items-start">
           <ProfileAvatar
             imageUrl="https://picsum.photos/200"
+            name="Jane Smith"
             onEditPress={handleEditAvatar}
           />
           <View className="flex-1">
