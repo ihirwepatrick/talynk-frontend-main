@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileStats from "@/components/ProfileStats";
@@ -30,13 +30,13 @@ const Profile = () => {
     console.log("Share profile clicked");
   };
 
-  const handlePostPress = (postId: string) => {
+  const handlePostPress = useCallback((postId: string) => {
     setSelectedPostId(postId);
-  };
+  }, []);
 
-  const handleClosePostView = () => {
+  const handleClosePostView = useCallback(() => {
     setSelectedPostId(null);
-  };
+  }, []);
 
   return (
     <SafeAreaView
