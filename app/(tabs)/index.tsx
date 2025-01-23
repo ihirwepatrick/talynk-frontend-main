@@ -1,9 +1,11 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { DropDown } from "@/components/SelectDropDown";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Post, { PostProps } from "@/components/Post";
+import Colors from "@/constants/Colors";
+import Typography from "@/constants/Typography";
 
 const posts: Array<PostProps> = [
   {
@@ -13,8 +15,8 @@ const posts: Array<PostProps> = [
     caption: "This is a dummy post",
     likes: 10,
     timeAgo: "2 days ago",
-    comments:["sdsoids",'dsdjsdksklds'],
-    shared:5
+    comments: ["sdsoids", "dsdjsdksklds"],
+    shared: 5,
   },
   {
     username: "Jane Doe",
@@ -23,8 +25,8 @@ const posts: Array<PostProps> = [
     caption: "This is another dummy post",
     likes: 20,
     timeAgo: "5 days ago",
-    comments:["sdsoids",'dsdjsdksklds'],
-    shared:5
+    comments: ["sdsoids", "dsdjsdksklds"],
+    shared: 5,
   },
   {
     username: "Bob Smith",
@@ -33,15 +35,18 @@ const posts: Array<PostProps> = [
     caption: "This is a third dummy post",
     likes: 30,
     timeAgo: "1 week ago",
-    comments:["sdsoids",'dsdjsdksklds'],
-    shared:5
+    comments: ["sdsoids", "dsdjsdksklds"],
+    shared: 5,
   },
 ];
 const TabsIndex = () => {
   return (
     <View className="flex-1 bg-black p-2">
       <HomeHeader />
-      <ScrollView showsVerticalScrollIndicator={false} className="mt-1 flex-1 mb-20">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="mt-1 flex-1 mb-20"
+      >
         {posts.map((post, index) => (
           <Post key={index} {...post} />
         ))}
@@ -52,55 +57,166 @@ const TabsIndex = () => {
 
 export default TabsIndex;
 
+type TimeFilter = "Last month" | "Last week" | "Today" | "All time";
+type PostFilter = "Videos" | "Photos" | "Popular" | "All Posts";
+
 export const HomeHeader = () => {
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>("Last month");
+  const [postFilter, setPostFilter] = useState<PostFilter>("Videos");
+  const [showTimeDropdown, setShowTimeDropdown] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+
+  const timeOptions: TimeFilter[] = [
+    "Last month",
+    "Last week",
+    "Today",
+    "All time",
+  ];
+  const filterOptions: PostFilter[] = [
+    "Videos",
+    "Photos",
+    "Popular",
+    "All Posts",
+  ];
+
   return (
-    <View>
+    <View className="px-4 py-2">
       <View className="flex-row items-center justify-between">
-        <View className="flex-row items-center">
+        <View className="flex-row items-center space-x-1">
           <Image
             source={require("@/assets/images/logo_talynk.png")}
-            className="h-8 w-8"
+            className="h-7 w-7"
             resizeMode="contain"
           />
-          <Image
-            source={require("@/assets/images/talynk_text.png")}
-            className="h-8 w-24 ml-1"
-            resizeMode="contain"
-          />
+          <Text
+            style={{ fontFamily: Typography.fonts.semiBold }}
+            className="text-white text-xl"
+          >
+            Tal<Text style={{ color: Colors.primary.main }}>ynk</Text>
+          </Text>
         </View>
-        
-        <View className="flex-row items-center gap-3">
+
+        <View className="flex-row items-center space-x-3">
           <TouchableOpacity>
             <Image
               source={require("@/assets/images/Ellipse 4 (1).png")}
-              className="h-10 w-10"
+              className="h-8 w-8 rounded-full"
             />
           </TouchableOpacity>
-          <TouchableOpacity className="items-center justify-center h-10 w-10 rounded-full bg-[#252629]">
-            <FontAwesome name="bell" size={20} color="white" />
+          <TouchableOpacity
+            style={{ backgroundColor: Colors.background.secondary }}
+            className="items-center justify-center h-8 w-8 rounded-full"
+          >
+            <Ionicons
+              name="notifications-outline"
+              size={20}
+              color={Colors.text.primary}
+            />
           </TouchableOpacity>
         </View>
       </View>
-      
-      <View className="mt-4 flex-row items-center justify-between gap-8">
-        <View className="px-2  border-white border rounded-xl flex-row items-center">
-          <Ionicons name="filter" size={15} color="white" className="" />
-          <DropDown
-            options={["Option 1", "Option 2", "Option 3"]}
-            placeholder="filter"
-          />
-        </View>
-        <View className="bg-[#252629] rounded-xl flex-1 py-0.5 flex-row items-center justify-between pl-4 ">
-          <Text className="text-white">All posts</Text>
-          <View className="px-2  border-white border rounded-xl flex-row items-center bg-black">
-            <Ionicons name="filter" size={15} color="white" className="" />
-            <DropDown
-              options={["Option 1", "Option 2", "Option 3"]}
-              placeholder="filter"
-            />
+
+      <View className="mt-4 flex-row items-center justify-between space-x-4">
+        <TouchableOpacity
+          onPress={() => setShowTimeDropdown(!showTimeDropdown)}
+          style={{ backgroundColor: Colors.background.secondary }}
+          className="flex-1 flex-row items-center space-x-2 py-2.5 px-4 rounded-2xl border border-zinc-800"
+        >
+          <Ionicons name="menu-outline" size={20} color={Colors.text.primary} />
+          <Text
+            style={{ fontFamily: Typography.fonts.medium }}
+            className="text-white flex-1"
+          >
+            {timeFilter}
+          </Text>
+          <Ionicons name="chevron-down" size={20} color={Colors.text.primary} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => setShowFilterDropdown(!showFilterDropdown)}
+          style={{ backgroundColor: Colors.background.secondary }}
+          className="flex-1 flex-row items-center space-x-2 py-2.5 px-4 rounded-2xl border border-zinc-800"
+        >
+          <Text
+            style={{ fontFamily: Typography.fonts.medium }}
+            className="text-white flex-1 text-center"
+          >
+            {postFilter}
+          </Text>
+          <View className="flex-row items-center space-x-2">
+            <Ionicons name="menu-outline" size={20} color={Colors.text.primary} />
+            <Text
+              style={{ fontFamily: Typography.fonts.medium }}
+              className="text-white"
+            >
+              Filter
+            </Text>
+            <Ionicons name="chevron-down" size={20} color={Colors.text.primary} />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
+
+      {showTimeDropdown && (
+        <View
+          style={{ backgroundColor: Colors.background.secondary }}
+          className="absolute top-[110px] left-4 right-[58%] rounded-xl border border-zinc-800 overflow-hidden z-20"
+        >
+          {timeOptions.map((option) => (
+            <TouchableOpacity
+              key={option}
+              onPress={() => {
+                setTimeFilter(option);
+                setShowTimeDropdown(false);
+              }}
+              className="py-3 px-4"
+              style={{
+                backgroundColor:
+                  timeFilter === option
+                    ? Colors.background.tertiary
+                    : "transparent",
+              }}
+            >
+              <Text
+                style={{ fontFamily: Typography.fonts.medium }}
+                className="text-white"
+              >
+                {option}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+
+      {showFilterDropdown && (
+        <View
+          style={{ backgroundColor: Colors.background.secondary }}
+          className="absolute top-[110px] left-[58%] right-4 rounded-xl border border-zinc-800 overflow-hidden z-20"
+        >
+          {filterOptions.map((option) => (
+            <TouchableOpacity
+              key={option}
+              onPress={() => {
+                setPostFilter(option);
+                setShowFilterDropdown(false);
+              }}
+              className="py-3 px-4"
+              style={{
+                backgroundColor:
+                  postFilter === option
+                    ? Colors.background.tertiary
+                    : "transparent",
+              }}
+            >
+              <Text
+                style={{ fontFamily: Typography.fonts.medium }}
+                className="text-white"
+              >
+                {option}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
