@@ -144,6 +144,7 @@ const PostView = ({
       animationType="fade"
       statusBarTranslucent
       onRequestClose={onClose}
+      hardwareAccelerated
     >
       <View className="flex-1 bg-black">
         <FlatList
@@ -159,6 +160,7 @@ const PostView = ({
           maxToRenderPerBatch={3}
           initialNumToRender={1}
           keyExtractor={(item) => item.id}
+          extraData={initialPostId}
         />
       </View>
     </Modal>

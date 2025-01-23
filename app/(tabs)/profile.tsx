@@ -12,6 +12,7 @@ import { approvedPosts } from "@/components/ProfileTabs";
 
 const Profile = () => {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleBoostProfile = () => {
     // Handle boost profile action
@@ -32,10 +33,13 @@ const Profile = () => {
 
   const handlePostPress = useCallback((postId: string) => {
     setSelectedPostId(postId);
+    setIsModalVisible(true);
   }, []);
 
   const handleClosePostView = useCallback(() => {
-    setSelectedPostId(null);
+    setIsModalVisible(false);
+    // Reset selectedPostId after modal is closed
+    setTimeout(() => setSelectedPostId(null), 300);
   }, []);
 
   return (
@@ -68,7 +72,7 @@ const Profile = () => {
         </View>
       </ScrollView>
       <PostView
-        visible={!!selectedPostId}
+        visible={isModalVisible}
         posts={approvedPosts}
         initialPostId={selectedPostId || ""}
         onClose={handleClosePostView}
