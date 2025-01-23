@@ -105,14 +105,17 @@ const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
 
   return (
     <View className="mt-6">
-      <View className="flex-row items-center border-b border-zinc-800">
+      <View className="flex-row items-center border-b-2 border-zinc-800">
         <TouchableOpacity
           onPress={() => setActiveTab("approved")}
           className="flex-1 pb-3"
         >
           <Text
             style={{
-              color: activeTab === "approved" ? Colors.text.primary : Colors.text.secondary,
+              color:
+                activeTab === "approved"
+                  ? Colors.text.primary
+                  : Colors.text.secondary,
               fontFamily: Typography.fonts.semiBold,
               fontSize: Typography.sizes.lg,
             }}
@@ -122,9 +125,9 @@ const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
           </Text>
         </TouchableOpacity>
 
-        <View 
-          style={{ backgroundColor: Colors.border.light }} 
-          className="h-5 w-[1px]" 
+        <View
+          style={{ backgroundColor: Colors.border.light }}
+          className="h-5 w-[3px]"
         />
 
         <TouchableOpacity
@@ -133,7 +136,10 @@ const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
         >
           <Text
             style={{
-              color: activeTab === "pending" ? Colors.text.primary : Colors.text.secondary,
+              color:
+                activeTab === "pending"
+                  ? Colors.text.primary
+                  : Colors.text.secondary,
               fontFamily: Typography.fonts.semiBold,
               fontSize: Typography.sizes.lg,
             }}
