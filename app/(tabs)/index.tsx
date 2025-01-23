@@ -61,7 +61,7 @@ type TimeFilter = "Last month" | "Last week" | "Today" | "All time";
 type PostFilter = "Videos" | "Photos" | "Popular" | "All Posts";
 
 export const HomeHeader = () => {
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>("Last month");
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>("All time");
   const [postFilter, setPostFilter] = useState<PostFilter>("Videos");
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
@@ -81,7 +81,8 @@ export const HomeHeader = () => {
 
   return (
     <View className="px-4 py-2">
-      <View className="flex-row items-center justify-between">
+      {/* Logo section */}
+      <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center space-x-1">
           <Image
             source={require("@/assets/images/logo_talynk.png")}
@@ -116,50 +117,44 @@ export const HomeHeader = () => {
         </View>
       </View>
 
-      <View className="mt-4 flex-row items-center justify-between space-x-4">
+      {/* Filter buttons */}
+      <View className="flex-row items-center justify-between">
         <TouchableOpacity
           onPress={() => setShowTimeDropdown(!showTimeDropdown)}
-          style={{ backgroundColor: Colors.background.secondary }}
-          className="flex-1 flex-row items-center space-x-2 py-2.5 px-4 rounded-2xl border border-zinc-800"
+          style={{ backgroundColor: "#18181B" }}
+          className="flex-[0.48] flex-row items-center justify-between py-3 px-4 rounded-xl border border-zinc-800"
         >
-          <Ionicons name="menu-outline" size={20} color={Colors.text.primary} />
+          <Ionicons name="menu" size={18} color={Colors.text.primary} />
           <Text
             style={{ fontFamily: Typography.fonts.medium }}
-            className="text-white flex-1"
+            className="text-white flex-1 ml-2"
           >
             {timeFilter}
           </Text>
-          <Ionicons name="chevron-down" size={20} color={Colors.text.primary} />
+          <Ionicons name="chevron-down" size={18} color={Colors.text.primary} />
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => setShowFilterDropdown(!showFilterDropdown)}
-          style={{ backgroundColor: Colors.background.secondary }}
-          className="flex-1 flex-row items-center space-x-2 py-2.5 px-4 rounded-2xl border border-zinc-800"
+          style={{ backgroundColor: "#18181B" }}
+          className="flex-[0.48] flex-row items-center justify-between py-3 px-4 rounded-xl border border-zinc-800"
         >
+          <Ionicons name="menu" size={18} color={Colors.text.primary} />
           <Text
             style={{ fontFamily: Typography.fonts.medium }}
-            className="text-white flex-1 text-center"
+            className="text-white flex-1 ml-2"
           >
             {postFilter}
           </Text>
-          <View className="flex-row items-center space-x-2">
-            <Ionicons name="menu-outline" size={20} color={Colors.text.primary} />
-            <Text
-              style={{ fontFamily: Typography.fonts.medium }}
-              className="text-white"
-            >
-              Filter
-            </Text>
-            <Ionicons name="chevron-down" size={20} color={Colors.text.primary} />
-          </View>
+          <Ionicons name="chevron-down" size={18} color={Colors.text.primary} />
         </TouchableOpacity>
       </View>
 
+      {/* Dropdowns */}
       {showTimeDropdown && (
         <View
           style={{ backgroundColor: Colors.background.secondary }}
-          className="absolute top-[110px] left-4 right-[58%] rounded-xl border border-zinc-800 overflow-hidden z-20"
+          className="absolute top-[90px] left-4 w-[48%] rounded-xl border border-zinc-800 overflow-hidden z-20"
         >
           {timeOptions.map((option) => (
             <TouchableOpacity
@@ -190,7 +185,7 @@ export const HomeHeader = () => {
       {showFilterDropdown && (
         <View
           style={{ backgroundColor: Colors.background.secondary }}
-          className="absolute top-[110px] left-[58%] right-4 rounded-xl border border-zinc-800 overflow-hidden z-20"
+          className="absolute top-[90px] right-4 w-[48%] rounded-xl border border-zinc-800 overflow-hidden z-20"
         >
           {filterOptions.map((option) => (
             <TouchableOpacity
