@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -28,6 +28,24 @@ const PostView = ({
   onClose,
 }: PostViewProps) => {
   const { width } = Dimensions.get("window");
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (visible) {
+      setIsReady(true);
+    } else {
+      // Reset ready state after modal closes
+      const timeout = setTimeout(() => {
+        setIsReady(false);
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [visible]);
+
+  const handleClose = useCallback(() => {
+    setIsReady(false);
+    onClose();
+  }, [onClose]);
 
   const getItemLayout = useCallback(
     (_data: unknown, index: number) => ({
@@ -48,7 +66,7 @@ const PostView = ({
         <SafeAreaView>
           <View className="px-4 py-2 flex-row items-center justify-between">
             <TouchableOpacity
-              onPress={onClose}
+              onPress={handleClose}
               className="flex-row items-center"
             >
               <Ionicons name="close" size={24} color={Colors.text.primary} />
@@ -136,15 +154,16 @@ const PostView = ({
     [width]
   );
 
-  if (!visible) return null;
+  if (!visible || !isReady) return null;
 
   return (
     <Modal
-      visible={visible}
+      visible={true}
       animationType="fade"
       statusBarTranslucent
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
       hardwareAccelerated
+      presentationStyle="fullScreen"
     >
       <View className="flex-1 bg-black">
         <FlatList
