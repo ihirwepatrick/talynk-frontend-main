@@ -19,6 +19,8 @@ type PostViewProps = {
   posts: Post[];
   initialPostId: string;
   onClose: () => void;
+  onDelete?: (postId: string) => void;
+  onArchive?: (postId: string) => void;
 };
 
 const PostView = ({
@@ -26,6 +28,8 @@ const PostView = ({
   posts,
   initialPostId,
   onClose,
+  onDelete,
+  onArchive,
 }: PostViewProps) => {
   const { width } = Dimensions.get("window");
   const [isReady, setIsReady] = useState(false);
@@ -71,13 +75,46 @@ const PostView = ({
             >
               <Ionicons name="close" size={24} color={Colors.text.primary} />
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Ionicons
-                name="ellipsis-vertical"
-                size={24}
-                color={Colors.text.primary}
-              />
-            </TouchableOpacity>
+
+            <View className="flex-row items-center">
+              <TouchableOpacity
+                onPress={() => onArchive?.(post.id)}
+                style={{ backgroundColor: Colors.background.tertiary }}
+                className="mr-4 flex-row items-center py-2 px-3 rounded-lg"
+              >
+                <Ionicons
+                  name="archive-outline"
+                  size={18}
+                  color={Colors.text.primary}
+                />
+                <Text
+                  style={{
+                    color: Colors.text.primary,
+                    fontFamily: Typography.fonts.medium,
+                    fontSize: Typography.sizes.sm,
+                  }}
+                  className="ml-2"
+                >
+                  Archive
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => onDelete?.(post.id)}
+                style={{ backgroundColor: Colors.status.error }}
+                className="py-2 px-3 rounded-lg"
+              >
+                <Text
+                  style={{
+                    color: Colors.text.primary,
+                    fontFamily: Typography.fonts.medium,
+                    fontSize: Typography.sizes.sm,
+                  }}
+                >
+                  Delete
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </SafeAreaView>
 
@@ -151,7 +188,7 @@ const PostView = ({
         </View>
       </View>
     ),
-    [width]
+    [width, onDelete, onArchive]
   );
 
   if (!visible || !isReady) return null;

@@ -38,6 +38,20 @@ const Profile = () => {
     setSelectedPostId(null);
   }, []);
 
+  const handleDeletePost = useCallback((postId: string) => {
+    // Add your delete logic here
+    console.log("Deleting post:", postId);
+    // Close the modal after deletion
+    setSelectedPostId(null);
+  }, []);
+
+  const handleArchivePost = useCallback((postId: string) => {
+    // Add your archive logic here
+    console.log("Archiving post:", postId);
+    // Close the modal after archiving
+    setSelectedPostId(null);
+  }, []);
+
   return (
     <SafeAreaView
       style={{ backgroundColor: Colors.background.primary }}
@@ -72,6 +86,8 @@ const Profile = () => {
         posts={approvedPosts}
         initialPostId={selectedPostId || ""}
         onClose={handleClosePostView}
+        onDelete={handleDeletePost}
+        onArchive={handleArchivePost}
       />
       {/* We'll add other components here as we build them */}
     </SafeAreaView>

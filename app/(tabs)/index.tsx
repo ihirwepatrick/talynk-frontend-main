@@ -54,24 +54,34 @@ export default TabsIndex;
 
 export const HomeHeader = () => {
   return (
-    <View className=" ">
+    <View>
       <View className="flex-row items-center justify-between">
-        <Image
-          source={require("@/assets/images/Frame 104.png")}
-          className="h-14 w-36"
-        />
-        <View className="flex-row item-center  gap-3">
+        <View className="flex-row items-center">
+          <Image
+            source={require("@/assets/images/logo_talynk.png")}
+            className="h-8 w-8"
+            resizeMode="contain"
+          />
+          <Image
+            source={require("@/assets/images/talynk_text.png")}
+            className="h-8 w-24 ml-1"
+            resizeMode="contain"
+          />
+        </View>
+        
+        <View className="flex-row items-center gap-3">
           <TouchableOpacity>
             <Image
               source={require("@/assets/images/Ellipse 4 (1).png")}
               className="h-10 w-10"
             />
           </TouchableOpacity>
-          <TouchableOpacity className=" items-center justify-center h-10 w-10  rounded-full bg-[#252629]">
+          <TouchableOpacity className="items-center justify-center h-10 w-10 rounded-full bg-[#252629]">
             <FontAwesome name="bell" size={20} color="white" />
           </TouchableOpacity>
         </View>
       </View>
+      
       <View className="mt-4 flex-row items-center justify-between gap-8">
         <View className="px-2  border-white border rounded-xl flex-row items-center">
           <Ionicons name="filter" size={15} color="white" className="" />
@@ -91,7 +101,6 @@ export const HomeHeader = () => {
           </View>
         </View>
       </View>
-
     </View>
   );
 };
