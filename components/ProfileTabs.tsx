@@ -105,71 +105,43 @@ const ProfileTabs = ({ onPostPress }: ProfileTabsProps) => {
 
   return (
     <View className="mt-6">
-      <View className="px-4 flex-row items-center justify-between">
-        <View className="flex-row flex-1">
-          <TouchableOpacity
-            onPress={() => setActiveTab("approved")}
-            className="flex-1 pb-3 border-b-2"
+      <View className="flex-row items-center border-b border-zinc-800">
+        <TouchableOpacity
+          onPress={() => setActiveTab("approved")}
+          className="flex-1 pb-3"
+        >
+          <Text
             style={{
-              borderColor:
-                activeTab === "approved"
-                  ? Colors.primary.main
-                  : Colors.border.light,
+              color: activeTab === "approved" ? Colors.text.primary : Colors.text.secondary,
+              fontFamily: Typography.fonts.semiBold,
+              fontSize: Typography.sizes.lg,
             }}
+            className="text-center"
           >
-            <Text
-              style={{
-                color:
-                  activeTab === "approved"
-                    ? Colors.text.primary
-                    : Colors.text.secondary,
-                fontFamily: Typography.fonts.semiBold,
-                fontSize: Typography.sizes.lg,
-              }}
-              className="text-center"
-            >
-              Approved Posts
-            </Text>
-          </TouchableOpacity>
+            Approved Posts
+          </Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => setActiveTab("pending")}
-            className="flex-1 pb-3 border-b-2"
+        <View 
+          style={{ backgroundColor: Colors.border.light }} 
+          className="h-5 w-[1px]" 
+        />
+
+        <TouchableOpacity
+          onPress={() => setActiveTab("pending")}
+          className="flex-1 pb-3"
+        >
+          <Text
             style={{
-              borderColor:
-                activeTab === "pending"
-                  ? Colors.primary.main
-                  : Colors.border.light,
+              color: activeTab === "pending" ? Colors.text.primary : Colors.text.secondary,
+              fontFamily: Typography.fonts.semiBold,
+              fontSize: Typography.sizes.lg,
             }}
+            className="text-center"
           >
-            <Text
-              style={{
-                color:
-                  activeTab === "pending"
-                    ? Colors.text.primary
-                    : Colors.text.secondary,
-                fontFamily: Typography.fonts.semiBold,
-                fontSize: Typography.sizes.lg,
-              }}
-              className="text-center"
-            >
-              Pending
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {activeTab === "approved" && (
-          <TouchableOpacity
-            onPress={() => setViewMode(viewMode === "grid" ? "full" : "grid")}
-            className="ml-4"
-          >
-            <Ionicons
-              name={viewMode === "grid" ? "list" : "grid"}
-              size={24}
-              color={Colors.text.primary}
-            />
-          </TouchableOpacity>
-        )}
+            Pending
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <View className="mt-4">
