@@ -6,9 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Share,
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import Share from "react-native-share";
 
 export interface PostProps {
   username: string;
@@ -41,15 +41,19 @@ const Post: React.FC<PostProps> = ({
 
   const handleShare = async () => {
     try {
-      const options = {
-        title: "Share via",
+      const result = await Share.share({
         message: caption,
-        url: postImage, // If you have a web URL for the post
-        social: Share.Social.WHATSAPP, // Optional specific platform
-        whatsAppNumber: "", // Optional specific number
-        filename: "post", // Optional filename for sharing
-      };
-      await Share.open(options);
+        title: username + "'s post",
+        // url: postImage // uncomment if you have a web URL
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      }
     } catch (error) {
       console.log("Error =>", error);
     }
