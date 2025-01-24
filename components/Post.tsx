@@ -8,6 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import Share from "react-native-share";
 
 export interface PostProps {
   username: string;
@@ -36,6 +37,22 @@ const Post: React.FC<PostProps> = ({
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+  };
+
+  const handleShare = async () => {
+    try {
+      const options = {
+        title: "Share via",
+        message: caption,
+        url: postImage, // If you have a web URL for the post
+        social: Share.Social.WHATSAPP, // Optional specific platform
+        whatsAppNumber: "", // Optional specific number
+        filename: "post", // Optional filename for sharing
+      };
+      await Share.open(options);
+    } catch (error) {
+      console.log("Error =>", error);
+    }
   };
 
   return (
@@ -82,6 +99,7 @@ const Post: React.FC<PostProps> = ({
           <TouchableOpacity
             style={styles.actionIcon}
             className="flex-row items-center"
+            onPress={handleShare}
           >
             <Ionicons name="paper-plane-outline" size={24} color="white" />
             {/* comments number */}
