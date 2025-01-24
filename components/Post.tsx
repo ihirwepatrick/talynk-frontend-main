@@ -104,11 +104,16 @@ const Post: React.FC<PostProps> = ({
           <Text className="text-white underline font-semibold pl-4">
             {comments.length.toLocaleString()} comments
           </Text>
-          <TextInput
-            className="bg-[#252629] rounded-xl flex-row items-center justify-between pl-4 w-full placeholder:text-white py-3 "
-            placeholder="Add a comment"
-            placeholderClassName="text-white"
-          />
+          <View className="flex-1 flex-row items-center bg-[#252629] rounded-xl px-4">
+            <TextInput
+              className="flex-1 py-3 text-white"
+              placeholder="Add a comment"
+              placeholderTextColor="white"
+            />
+            <TouchableOpacity>
+              <Ionicons name="send" size={12} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
