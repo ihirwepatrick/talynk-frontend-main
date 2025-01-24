@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
-import { Video } from "expo-av";
+import { Video, ResizeMode } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 
@@ -38,7 +38,7 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
       <Video
         ref={videoRef}
         source={{ uri: data.videoUrl }}
-        resizeMode="cover"
+        resizeMode={ResizeMode.COVER}
         isLooping
         style={{ flex: 1 }}
       />
@@ -49,7 +49,7 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
         <View className="mb-4">
           <View className="flex-row items-center mb-2">
             <Image
-              source={data.user.avatar}
+              source={{ uri: data.user.avatar }}
               className="w-10 h-10 rounded-full"
             />
             <Text className="text-white font-medium ml-2">

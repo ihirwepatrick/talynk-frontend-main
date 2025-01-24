@@ -27,7 +27,20 @@ export default function ForYouScreen() {
   const reels: ReelData[] = [
     {
       id: "1",
-      videoUrl: "YOUR_VIDEO_URL",
+      videoUrl: require("@/assets/videos/car.mp4"),
+      user: {
+        name: "John Smith",
+        avatar: require("@/assets/images/Ellipse 4 (1).png"),
+      },
+      caption: "Some Caption Text",
+      likes: 115000,
+      comments: 101,
+      shares: 32000,
+      hashtags: ["foryou", "guitar", "talent"],
+    },
+    {
+      id: "1",
+      videoUrl: require("@/assets/videos/car2.mp4"),
       user: {
         name: "John Smith",
         avatar: require("@/assets/images/Ellipse 4 (1).png"),
