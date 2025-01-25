@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  ImageSourcePropType,
+} from "react-native";
 import { useVideoPlayer, VideoView } from "expo-video";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
@@ -11,7 +18,7 @@ interface VideoReelProps {
     videoUrl: string;
     user: {
       name: string;
-      avatar: string;
+      avatar: ImageSourcePropType;
     };
     caption: string;
     likes: number;
@@ -47,7 +54,7 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
         <View className="mb-4">
           <View className="flex-row items-center mb-2">
             <Image
-              source={{ uri: data.user.avatar }}
+              source={data.user.avatar}
               className="w-10 h-10 rounded-full"
             />
             <Text className="text-white font-medium ml-2">

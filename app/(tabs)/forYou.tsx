@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, Dimensions, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import VideoReel from "@/components/VideoReel";
 import Colors from "@/constants/Colors";
@@ -11,7 +17,7 @@ interface ReelData {
   videoUrl: string;
   user: {
     name: string;
-    avatar: string;
+    avatar: ImageSourcePropType;
   };
   caption: string;
   likes: number;
@@ -31,7 +37,7 @@ export default function ForYouScreen() {
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       user: {
         name: "John Smith",
-        avatar: require("@/assets/images/Ellipse 4 (1).png"),
+        avatar: require("../../assets/images/user.png"),
       },
       caption: "Some Caption Text",
       likes: 115000,
