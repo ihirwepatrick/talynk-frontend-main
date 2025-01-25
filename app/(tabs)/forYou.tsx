@@ -45,6 +45,33 @@ export default function ForYouScreen() {
       shares: 32000,
       hashtags: ["foryou", "guitar", "talent"],
     },
+    {
+      id: "1",
+      videoUrl: require("../../assets/videos/car.mp4"),
+      user: {
+        name: "John Smith",
+        avatar: require("../../assets/images/user.png"),
+      },
+      caption: "Some Caption Text",
+      likes: 115000,
+      comments: 101,
+      shares: 32000,
+      hashtags: ["foryou", "guitar", "talent"],
+    },
+    {
+      id: "1",
+      videoUrl:
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      user: {
+        name: "John Smith",
+        avatar: require("../../assets/images/user.png"),
+      },
+      caption: "Some Caption Text",
+      likes: 115000,
+      comments: 101,
+      shares: 32000,
+      hashtags: ["foryou", "guitar", "talent"],
+    },
     // Add more reels...
   ];
 
