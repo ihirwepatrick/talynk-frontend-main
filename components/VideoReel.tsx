@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { useVideoPlayer, VideoView } from "expo-video";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 
@@ -23,24 +23,22 @@ interface VideoReelProps {
 }
 
 export default function VideoReel({ data, isActive }: VideoReelProps) {
-  const videoRef = React.useRef<Video>(null);
-
-  React.useEffect(() => {
+  const player = useVideoPlayer(data.videoUrl, (player) => {
+    player.loop = true;
     if (isActive) {
-      videoRef.current?.playAsync();
+      player.play();
     } else {
-      videoRef.current?.pauseAsync();
+      player.pause();
     }
-  }, [isActive]);
+  });
 
   return (
     <View style={{ height: WINDOW_HEIGHT }} className="bg-black">
-      <Video
-        ref={videoRef}
-        source={{ uri: data.videoUrl }}
-        resizeMode={ResizeMode.COVER}
-        isLooping
+      <VideoView
         style={{ flex: 1 }}
+        player={player}
+        allowsFullscreen
+        allowsPictureInPicture
       />
 
       {/* Overlay Content */}
