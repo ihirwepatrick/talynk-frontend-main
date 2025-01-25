@@ -52,7 +52,7 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
       {/* Overlay Content */}
       <View className="absolute inset-0 bg-black/10">
         {/* Right Side Actions */}
-        <View className="absolute right-4 bottom-32 items-center">
+        <View className="absolute right-4 bottom-44 items-center">
           <TouchableOpacity className="items-center mb-6">
             <Ionicons name="heart-outline" size={35} color="white" />
             <Text className="text-white text-sm font-medium">
@@ -80,7 +80,7 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
         </View>
 
         {/* Bottom Content */}
-        <View className="absolute bottom-4 left-4 right-16">
+        <View className="absolute bottom-32 left-4 right-16">
           <View className="flex-row items-center">
             <Image
               source={data.user.avatar}
@@ -101,23 +101,25 @@ export default function VideoReel({ data, isActive }: VideoReelProps) {
             ))}
           </View>
 
-          {/* Comments Input */}
-          <View className="mt-4 flex-row items-center bg-black/30 rounded-full border border-white/20 px-4 py-2">
-            <TextInput
-              placeholder="Type a comment..."
-              placeholderTextColor="white"
-              className="flex-1 text-white text-sm"
-            />
+          {/* Comments Section */}
+          <View className="mt-4 flex-row items-center justify-between">
+            <View className="flex-1 flex-row items-center bg-black/30 rounded-full border border-white/20 px-4 py-2 mr-3">
+              <TextInput
+                placeholder="Type a comment..."
+                placeholderTextColor="white"
+                className="flex-1 text-white text-sm"
+              />
+              <TouchableOpacity>
+                <Ionicons name="send" size={20} color="white" />
+              </TouchableOpacity>
+            </View>
+
             <TouchableOpacity>
-              <Ionicons name="send" size={20} color="white" />
+              <Text className="text-white/70 text-sm">
+                {data.comments} Comments
+              </Text>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity className="mt-2">
-            <Text className="text-white/70 text-sm">
-              {data.comments} Comments
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
