@@ -103,19 +103,19 @@ export default function SearchScreen() {
             {suggestions.map((suggestion) => (
               <TouchableOpacity
                 key={suggestion.id}
-                className="w-[48%] mb-4 bg-zinc-900 rounded-xl overflow-hidden"
+                className="w-[32%] mb-3 bg-zinc-900 rounded-lg overflow-hidden"
               >
                 <Image
                   source={suggestion.avatar}
-                  className="w-full h-40"
+                  className="w-full h-28"
                   resizeMode="cover"
                 />
-                <View className="p-2 flex-row items-center">
+                <View className="p-1.5 flex-row items-center">
                   <Image
                     source={suggestion.avatar}
-                    className="w-6 h-6 rounded-full"
+                    className="w-5 h-5 rounded-full"
                   />
-                  <Text className="text-white ml-2 font-medium">
+                  <Text className="text-white ml-1.5 font-medium text-xs">
                     {suggestion.name}
                   </Text>
                 </View>
