@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 import { useVideoPlayer, VideoView } from "expo-video";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
+import { useIsFocused } from "@react-navigation/native";
 
 const { height: WINDOW_HEIGHT } = Dimensions.get("window");
 
@@ -31,14 +32,19 @@ interface VideoReelProps {
 }
 
 export default function VideoReel({ data, isActive }: VideoReelProps) {
+  const isFocused = useIsFocused();
+
   const player = useVideoPlayer(data.videoUrl, (player) => {
     player.loop = true;
-    if (isActive) {
+  });
+
+  useEffect(() => {
+    if (isActive && isFocused) {
       player.play();
     } else {
       player.pause();
     }
-  });
+  }, [isActive, isFocused]);
 
   return (
     <View style={{ height: WINDOW_HEIGHT }} className="bg-black">

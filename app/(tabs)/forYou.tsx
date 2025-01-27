@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 import { FlashList } from "@shopify/flash-list";
 import VideoReel from "@/components/VideoReel";
 import Colors from "@/constants/Colors";
+import { useIsFocused } from "@react-navigation/native";
 
 const { height: WINDOW_HEIGHT } = Dimensions.get("window");
 
@@ -28,6 +29,16 @@ interface ReelData {
 
 export default function ForYouScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isFocused = useIsFocused();
+
+  // Pause video when leaving the screen
+  useEffect(() => {
+    if (!isFocused) {
+      setCurrentIndex(-1); // This will pause all videos
+    } else {
+      setCurrentIndex(0); // Resume playing the first video when returning
+    }
+  }, [isFocused]);
 
   // Mock data - replace with your API call
   const reels: ReelData[] = [
@@ -80,13 +91,16 @@ export default function ForYouScreen() {
       <FlashList
         data={reels}
         renderItem={({ item, index }) => (
-          <VideoReel data={item} isActive={currentIndex === index} />
+          <VideoReel
+            data={item}
+            isActive={currentIndex === index && isFocused}
+          />
         )}
         estimatedItemSize={WINDOW_HEIGHT}
         pagingEnabled
         showsVerticalScrollIndicator={false}
         onViewableItemsChanged={({ changed }) => {
-          if (changed && changed[0].isViewable) {
+          if (changed && changed[0].isViewable && isFocused) {
             setCurrentIndex(changed[0].index ?? 0);
           }
         }}
