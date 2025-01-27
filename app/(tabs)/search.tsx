@@ -50,7 +50,7 @@ export default function SearchScreen() {
     <View className="flex-1 bg-black pt-12">
       {/* Search Input */}
       <View className="px-4 mb-6">
-        <View className="flex-row items-center bg-zinc-900 rounded-full px-4 py-2">
+        <View className="flex-row items-center bg-zinc-900 rounded-xl px-4 py-0.5">
           <Ionicons name="search" size={20} color="white" />
           <TextInput
             placeholder="Search"
