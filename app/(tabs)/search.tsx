@@ -27,22 +27,47 @@ export default function SearchScreen() {
     {
       id: "1",
       name: "John Smith",
-      avatar: require("../../assets/images/user.png"),
+      avatar: require("../../assets/images/cench.jpg"),
     },
     {
       id: "2",
       name: "John Smith",
-      avatar: require("../../assets/images/user.png"),
+      avatar: require("../../assets/images/bw.jpeg"),
     },
     {
       id: "3",
       name: "John Smith",
-      avatar: require("../../assets/images/user.png"),
+      avatar: require("../../assets/images/luvas.jpeg"),
     },
     {
       id: "4",
       name: "John Smith",
-      avatar: require("../../assets/images/user.png"),
+      avatar: require("../../assets/images/tibo.jpeg"),
+    },
+    {
+      id: "5",
+      name: "John Smith",
+      avatar: require("../../assets/images/tibo.jpeg"),
+    },
+    {
+      id: "6",
+      name: "John Smith",
+      avatar: require("../../assets/images/tibo.jpeg"),
+    },
+    {
+      id: "7",
+      name: "John Smith",
+      avatar: require("../../assets/images/cench.jpg"),
+    },
+    {
+      id: "8",
+      name: "John Smith",
+      avatar: require("../../assets/images/tibo.jpeg"),
+    },
+    {
+      id: "9",
+      name: "John Smith",
+      avatar: require("../../assets/images/cench.jpg"),
     },
   ];
 
