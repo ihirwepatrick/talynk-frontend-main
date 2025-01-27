@@ -9,19 +9,23 @@ import Colors from '@/constants/Colors';
 export default function UploadScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [hasAudioPermission, setHasAudioPermission] = useState(false);
-  const [type, setType] = useState(CameraType.back);
+  const [type, setType] = useState<'front' | 'back'>('back');
   const [isRecording, setIsRecording] = useState(false);
   const cameraRef = useRef<Camera>(null);
   const router = useRouter();
 
   useEffect(() => {
     (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const audioPermission = await Camera.requestMicrophonePermissionsAsync();
-      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+      try {
+        const cameraStatus = await Camera.requestCameraPermissionsAsync();
+        const audioStatus = await Camera.requestMicrophonePermissionsAsync();
+        const mediaStatus = await MediaLibrary.requestPermissionsAsync();
 
-      setHasCameraPermission(cameraPermission.status === "granted");
-      setHasAudioPermission(audioPermission.status === "granted");
+        setHasCameraPermission(cameraStatus.status === 'granted');
+        setHasAudioPermission(audioStatus.status === 'granted');
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 
@@ -33,10 +37,10 @@ export default function UploadScreen() {
         </Text>
         <TouchableOpacity
           onPress={async () => {
-            const cameraPermission = await Camera.requestCameraPermissionsAsync();
-            const audioPermission = await Camera.requestMicrophonePermissionsAsync();
-            setHasCameraPermission(cameraPermission.status === "granted");
-            setHasAudioPermission(audioPermission.status === "granted");
+            const cameraStatus = await Camera.requestCameraPermissionsAsync();
+            const audioStatus = await Camera.requestMicrophonePermissionsAsync();
+            setHasCameraPermission(cameraStatus.status === 'granted');
+            setHasAudioPermission(audioStatus.status === 'granted');
           }}
           className="bg-blue-500 px-6 py-3 rounded-full"
         >
@@ -47,7 +51,7 @@ export default function UploadScreen() {
   }
 
   const toggleCameraType = () => {
-    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+    setType(current => current === 'back' ? 'front' : 'back');
   };
 
   const handleRecording = async () => {
@@ -69,7 +73,7 @@ export default function UploadScreen() {
     <View className="flex-1 bg-black">
       <Camera 
         ref={cameraRef}
-        type={type}
+        type={type === 'back' ? CameraType.back : CameraType.front}
         className="flex-1"
       >
         {/* Header */}
