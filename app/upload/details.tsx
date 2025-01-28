@@ -44,7 +44,7 @@ export default function PostDetailsScreen() {
         <View className="px-4">
           <View className="flex-row mb-4">
             <Image
-              source={require("../../assets/images/thumbnail.jpg")}
+              source={require("../../assets/images/cench.jpg")}
               className="w-20 h-20 rounded-lg bg-zinc-900"
             />
             <TextInput
