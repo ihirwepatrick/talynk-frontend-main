@@ -56,6 +56,7 @@ export default function UploadScreen() {
     if (isRecording) {
       setIsRecording(false);
       await cameraRef.current.stopRecording();
+      router.push("/upload/details");
     } else {
       setIsRecording(true);
       try {
